@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Vérifie si un argument est fourni, si oui, on l'utilise directement
+if [[ $# -eq 1 ]]; then
+    selected="$1"
+else
+    # Sinon, utilise fzf pour sélectionner un dossier dans ~/Documents/...
+    selected=$(find ~/Documents/personal/ ~/Documents/work/ -mindepth 1 -maxdepth 1 -type d | fzf)
+    
+    # Si rien n'est sélectionné, quitter le script proprement
+    if [[ -z "$selected" ]]; then
+        exit 0
+    fi
+fi
+
+# Extraire le nom du dossier et remplacer les points par des underscores
+selected_name=$(basename "$selected" | tr . _)
+echo $selected_name
+
+# Vérifier si on est dans une session TMUX
+if [[ -z "$TMUX" ]]; then
+    # Si on est hors de TMUX, créer une nouvelle session ou s'attacher si elle existe déjà
+    tmux new-session -A -s "$selected_name" -c "$selected" 2>/dev/null
+else
+    # Si on est dans TMUX, vérifier si la session existe déjà
+    if tmux has-session -t "$selected_name" 2>/dev/null; then
+        # Si oui, basculer dessus
+        tmux switch-client -t "$selected_name" 2>/dev/null
+    else
+        # Sinon, créer une nouvelle session en arrière-plan puis basculer dessus
+        tmux new-session -d -s "$selected_name" -c "$selected" 2>/dev/null
+        tmux switch-client -t "$selected_name" 2>/dev/null
+    fi
+fi

@@ -34,17 +34,35 @@ vim.opt.updatetime = 50 -- Temps en millisecondes pour la mise à jour des fichi
 -- Guide de longueur de ligne
 vim.opt.colorcolumn = "80" -- Affiche une ligne verticale à la colonne 80 pour indiquer la limite de longueur
 
+-- vim.diagnostic.config({
+--     virtual_text = {
+--         source = true,
+--         -- prefix = '◆'
+--         prefix = '🙀'
+--     },                       -- Texte virtuel à la fin des lignes
+--     signs = true,            -- Icônes dans la colonne des signes
+--     underline = false,       -- Soulignement du texte problématique
+--     update_in_insert = false, -- Ne pas mettre à jour pendant le mode insertion
+--     severity_sort = true,    -- Trier par sévérité (erreurs avant avertissements)
+--     source = true
+-- })
 vim.diagnostic.config({
     virtual_text = {
-        source = true,
-        -- prefix = '◆'
-        prefix = '🙀'
-    },                       -- Texte virtuel à la fin des lignes
-    signs = true,            -- Icônes dans la colonne des signes
-    underline = false,       -- Soulignement du texte problématique
-    update_in_insert = true, -- Ne pas mettre à jour pendant le mode insertion
-    severity_sort = true,    -- Trier par sévérité (erreurs avant avertissements)
-    source = true
+        source = true, -- Afficher la source du diagnostic
+        prefix = function(diagnostic)
+            local icons = {
+                [vim.diagnostic.severity.ERROR] = "💀 ", -- Icône pour les erreurs
+                [vim.diagnostic.severity.WARN]  = "😱 ", -- Icône pour les avertissements
+                [vim.diagnostic.severity.INFO]  = "📘 ", -- Icône pour les informations
+                [vim.diagnostic.severity.HINT]  = "💡 ", -- Icône pour les conseils
+            }
+            return icons[diagnostic.severity] -- Retourne uniquement le préfixe
+        end,
+    },
+    signs = true,             -- Icônes dans la colonne des signes
+    underline = false,        -- Soulignement du texte problématique
+    update_in_insert = false, -- Ne pas mettre à jour pendant le mode insertion
+    severity_sort = true,     -- Trier par sévérité (erreurs avant avertissements)
 })
 
 -- Change color Diagnostic

@@ -18,6 +18,11 @@ return {
                 -- Additional schemas available in Telescope picker
                 schemas = {
                     {
+                        name = "GitHub Actions Workflow",
+                        uri = "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json",
+                        file_match = { "/.github/workflows/*.yml", "/.github/workflows/*.yaml" },
+                    },
+                    {
                         name = "kubernetes-Deployment",
                         uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/" .. k8s_version .. "-standalone-strict/deployment.json",
                     },

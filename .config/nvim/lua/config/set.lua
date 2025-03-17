@@ -29,8 +29,7 @@ vim.opt.signcolumn = "yes"      -- Affiche la colonne des signes (pour les diagn
 vim.opt.iskeyword:append("@-@") -- Ajoute les caractères spéciaux aux mots-clés (pour la complétion)
 
 -- Performances
-vim.opt.updatetime = 50 -- Temps en millisecondes pour la mise à jour des fichiers swaps
-
+vim.opt.updatetime = 50    -- Temps en millisecondes pour la mise à jour des fichiers swaps
 -- Guide de longueur de ligne
 vim.opt.colorcolumn = "80" -- Affiche une ligne verticale à la colonne 80 pour indiquer la limite de longueur
 
@@ -60,7 +59,7 @@ vim.diagnostic.config({
         end,
     },
     signs = true,             -- Icônes dans la colonne des signes
-    underline = false,        -- Soulignement du texte problématique
+    underline = true,         -- Soulignement du texte problématique
     update_in_insert = false, -- Ne pas mettre à jour pendant le mode insertion
     severity_sort = true,     -- Trier par sévérité (erreurs avant avertissements)
 })
@@ -71,4 +70,9 @@ vim.cmd([[
     highlight DiagnosticVirtualTextWarn  guifg=#b877db guibg=#1d1f27
     highlight DiagnosticVirtualTextInfo  guifg=#00ff00 guibg=#1d1f27
     highlight DiagnosticVirtualTextHint  guifg=#00ffff guibg=#1d1f27
+"--
+    highlight DiagnosticUnderlineError gui=undercurl guisp=red
+    highlight DiagnosticUnderlineWarn  gui=undercurl guisp=orange
+    highlight DiagnosticUnderlineInfo  gui=undercurl guisp=blue
+    highlight DiagnosticUnderlineHint  gui=undercurl guisp=green
 ]])

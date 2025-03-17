@@ -12,9 +12,13 @@ return {
         },
         config = function()
             local capabilities = require('blink.cmp').get_lsp_capabilities()
-            require("lspconfig").lua_ls.setup { capabilities = capabilities }
+            local NoLspFormat = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+            end
+            require("lspconfig").lua_ls.setup { capabilities = capabilities, on_attach = NoLspFormat }
             require("lspconfig").pyright.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("requirements.txt", "setup.py", ".git"),
                 filetypes = { 'py' },
                 settings = {
@@ -27,14 +31,17 @@ return {
             }
             require("lspconfig").ts_ls.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "eslint.config.js", "package.json", ".git"),
             }
             require("lspconfig").terraformls.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern(".terraform", ".git"),
             }
             require("lspconfig").gopls.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
                 cmd = { "gopls" },
                 settings = {
@@ -49,6 +56,7 @@ return {
                 },
             }
             require("lspconfig").jsonls.setup {
+                on_attach = NoLspFormat,
                 cmd = { "vscode-json-languageserver", "--stdio" },
                 filetypes = { "json", "jsonc" },
                 capabilities = capabilities,
@@ -61,20 +69,29 @@ return {
             }
             require("lspconfig").yamlls.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 cmd = { "yaml-language-server", "--stdio" },
                 filetypes = { "yaml", "yml" },
             }
 
             require("lspconfig").html.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("package.json", ".git"),
                 cmd = { "vscode-html-language-server", "--stdio" },
                 filetypes = { "html" },
             }
-            require("lspconfig").stylelint_lsp.setup {
+            -- require("lspconfig").stylelint_lsp.setup {
+            --     capabilities = capabilities,
+            --     root_dir = require("lspconfig.util").root_pattern("package.json", ".git"),
+            --     cmd = { "stylelint-lsp", "--stdio" },
+            --     filetypes = { "css", "scss", "less", "sass", "postcss" }, -- Types de fichiers pris en charge
+            -- }
+            require("lspconfig").cssls.setup {
                 capabilities = capabilities,
+                on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("package.json", ".git"),
-                cmd = { "stylelint-lsp", "--stdio" },
+                cmd = { "vscode-css-language-server", "--stdio" },
                 filetypes = { "css", "scss", "less", "sass", "postcss" }, -- Types de fichiers pris en charge
             }
         end,

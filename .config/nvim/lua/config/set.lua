@@ -1,6 +1,8 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.opt.wrap = true -- retour à la ligne automatique
+
 -- Indentation
 vim.opt.tabstop = 4        -- Chaque tabulation correspond à 4 espaces
 vim.opt.softtabstop = 4    -- Indentation et désindentation en mode insertion
@@ -76,3 +78,9 @@ vim.cmd([[
     highlight DiagnosticUnderlineInfo  gui=undercurl guisp=blue
     highlight DiagnosticUnderlineHint  gui=undercurl guisp=green
 ]])
+
+vim.filetype.add({
+    extension = {
+        tfvars = "tfvars", -- Associe .tfvars au type de fichier "terraform"
+    }
+})

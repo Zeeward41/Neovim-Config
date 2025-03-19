@@ -8,6 +8,7 @@ return {
                 css = { "prettier" },
                 graphql = { "prettier" },
                 json = { "prettier" },
+                jsonc = { "prettier" },
                 html = { "prettier" },
                 lua = { "stylua" },
                 markdown = { "prettier" },

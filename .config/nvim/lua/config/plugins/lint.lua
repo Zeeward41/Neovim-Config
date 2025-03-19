@@ -9,11 +9,15 @@ return {
                 javascriptreact = { 'eslint' },
                 typescript = { 'eslint' },
                 typescriptreact = { 'eslint' },
-                -- css = { 'stylelint' },
+                css = { 'stylelint' },
                 python = { 'ruff' },
                 go = { 'golangcilint' },
                 -- lua = { 'luacheck' },
             }
+
+            -- lint.linters["golangcilint"].args = {
+            --     "run", "--out-format=json"
+            -- }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

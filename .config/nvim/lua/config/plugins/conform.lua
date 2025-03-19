@@ -19,7 +19,8 @@ return {
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
                 yaml = { "prettier" },
-                hcl = { "hcl" }
+                terraform = { "terraform_fmt" },
+                tfvars = { "terraform_fmt" },
             },
             format_on_save = {
                 timeout_ms = 500,

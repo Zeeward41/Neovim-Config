@@ -18,6 +18,10 @@ return {
                 -- Additional schemas available in Telescope picker
                 schemas = {
                     {
+                        name = "Ansible Playbook",
+                        uri = "https://raw.githubusercontent.com/ansible/ansible-lint/refs/heads/main/src/ansiblelint/schemas/playbook.json",
+                    },
+                    {
                         name = "GitHub Actions Workflow",
                         uri = "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-workflow.json",
                         file_match = { "/.github/workflows/*.yml", "/.github/workflows/*.yaml" },

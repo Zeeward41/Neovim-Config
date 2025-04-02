@@ -1,7 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.wrap = true -- retour à la ligne automatique
 
 -- Indentation
 vim.opt.tabstop = 4        -- Chaque tabulation correspond à 4 espaces
@@ -11,7 +10,7 @@ vim.opt.expandtab = true   -- Remplace les tabulations par des espaces
 vim.opt.smartindent = true -- Ajuste automatiquement l'indentation lors d'une nouvelle ligne
 
 -- Affichage
-vim.opt.wrap = false                  -- Active ou désactive le retour à la ligne automatique
+vim.opt.wrap = true                   -- Active ou désactive le retour à la ligne automatique
 vim.opt.swapfile = false              -- Désactive la création de fichiers temporaires en cas de plantage
 vim.opt.backup = false                -- Désactive la création de fichiers de sauvegarde
 vim.opt.undodir = os.getenv("HOME") ..
@@ -82,5 +81,6 @@ vim.cmd([[
 vim.filetype.add({
     extension = {
         tfvars = "tfvars", -- Associe .tfvars au type de fichier "terraform"
+        tf = "terraform",
     }
 })

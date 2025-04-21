@@ -80,7 +80,7 @@ vim.cmd([[
 
 vim.filetype.add({
     extension = {
-        tfvars = "tfvars", -- Associe .tfvars au type de fichier "terraform"
-        tf = "terraform",
+        tfvars = "hcl", -- Associe .tfvars au type de fichier "terraform"
+        tf = "hcl",
     }
 })

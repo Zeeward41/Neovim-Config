@@ -43,7 +43,7 @@ return {
                 capabilities = capabilities,
                 on_attach = NoLspFormat,
                 root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
-                cmd = { "gopls" },
+                cmd = { "/installation/programs/go_bin/gopls" },
                 settings = {
                     gopls = {
                         codelenses = {

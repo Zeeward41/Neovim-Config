@@ -14,14 +14,19 @@ return {
                 go = { 'golangcilint' },
                 -- lua = { 'luacheck' },
             }
-
-            -- lint.linters["golangcilint"].args = {
-            --     "run", "--out-format=json"
-            -- }
+            -- Définir le linter personnalisé pour golangci-lint
+            lint.linters.golangcilint_custom = {
+                name = 'golangcilint_custom',
+                cmd = '/installation/programs/go_bin/golangci-lint',
+                args = { 'run', '--out-format', 'json' },
+                stream = 'stdout',
+                ignore_exitcode = true,
+            }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
             vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged" }, {
+            -- vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged" }, {
                 group = lint_augroup,
                 callback = function()
                     lint.try_lint()

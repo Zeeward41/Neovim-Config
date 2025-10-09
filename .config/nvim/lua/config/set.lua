@@ -1,5 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.fileformat = "unix"
 
 
 -- Indentation
@@ -60,7 +61,9 @@ vim.diagnostic.config({
         end,
     },
     signs = true,             -- Icônes dans la colonne des signes
-    underline = true,         -- Soulignement du texte problématique
+    underline = {
+        severity = { min = vim.diagnostic.severity.WARN}
+    },         -- Soulignement du texte problématique
     update_in_insert = false, -- Ne pas mettre à jour pendant le mode insertion
     severity_sort = true,     -- Trier par sévérité (erreurs avant avertissements)
 })
